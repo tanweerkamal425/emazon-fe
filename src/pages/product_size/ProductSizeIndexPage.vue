@@ -1,7 +1,7 @@
 <template>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-auto">
-            <h1 class="text-2xl mb-4">Product Images</h1>
+            <h1 class="text-2xl mb-4">Product Sizes</h1>
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -71,7 +71,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <router-link :to="{name: 'product_image.store', params: {id: 123}}" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <router-link :to="{name: 'product_size.store', params: {id: 123}}" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
@@ -85,25 +85,24 @@
                             <tr>
                                 <th scope="col" class="px-4 py-3">ID</th>
                                 <th scope="col" class="px-4 py-3">Product ID</th>
-                                <th scope="col" class="px-4 py-3">Image</th>
-                                <th scope="col" class="px-4 py-3">Default</th>
+                                <th scope="col" class="px-4 py-3">Size ID</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="pi in product_images" :key="pi.id">
+                            <template v-for="ps in product_sizes" :key="ps.id">
                                 <tr class="border-b dark:border-gray-700">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ pi.id }}</th>
-                                    <td class="px-4 py-3">{{ pi.product_id }}</td>
-                                    <td class="px-4 py-3"><img src="https://placehold.co/60x40" alt=""></td>
-                                    <td class="px-4 py-3">{{ pi.is_default }}</td>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ ps.id }}</th>
+                                    <td class="px-4 py-3">{{ ps.product_id }}</td>
+                                    <!-- <td class="px-4 py-3"><img src="https://placehold.co/60x40" alt=""></td> -->
+                                    <td class="px-4 py-3">{{ ps.size_id }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <div class="flex flex-row">
                                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
                                                 <li>
-                                                    <router-link :to="{name: 'product_image.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <router-link :to="{name: 'product_image.show', params: {id: ps.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
                                                         <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -111,7 +110,7 @@
                                                     </router-link>
                                                 </li>
                                                 <li>
-                                                    <router-link :to="{name: 'product_image.edit', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <router-link :to="{name: 'product_image.edit', params: {id: ps.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                         </svg>
@@ -119,7 +118,7 @@
                                                 </li>
                                             </ul>
                                             <div class="py-1">
-                                                <router-link :to="{name: 'product_image.delete', params: {id: 123}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                <router-link :to="{name: 'product_image.delete', params: {id: ps.id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
                                                     </svg>
@@ -183,7 +182,7 @@
 import {initDropdowns, initTooltips, initModals} from 'flowbite'
 import axios from 'axios'
 
-import {useProductImageStore} from '@/stores/ProductImageStore.js'
+import {useProductSizeStore} from '@/stores/ProductSizeStore.js'
 import {mapState} from 'pinia'
 
 
@@ -198,15 +197,15 @@ export default {
 
     data() {
         return {
-            product_images: [],
+            product_sizes: [],
         }
     },
 
     methods: {
-        fetchProductImages(query = {}) {
-			this.getProductImages(query).then((data) => {
+        fetchProductSizes(query = {}) {
+			this.getProductSizes(query).then((data) => {
 				console.log(data);
-				this.product_images = data.data;
+				this.product_sizes = data.data;
 			}).catch((error) => {
 				// console.error(error);
 			}).finally(() => {
@@ -216,13 +215,12 @@ export default {
     },
 
     mounted() {
-        this.fetchProductImages();
+        this.fetchProductSizes();
         initDropdowns();
-        initModals();
     },
 
     computed: {
-        ...mapState(useProductImageStore, ['getProductImages'])
+        ...mapState(useProductSizeStore, ['getProductSizes'])
     }
 }
 </script>

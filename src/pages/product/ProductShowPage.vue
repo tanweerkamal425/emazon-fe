@@ -33,9 +33,9 @@
                     <div class="flex flex-row gap-x-2">
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">S</dd>
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">M</dd>
-                        <router-link :to="{name: 'size.store'}" class="border-black border-2 mb-4 ml-8 px-2 hover:text-blue-700 hover:border-blue-700">
+                        <!-- <router-link :to="{name: 'size.store'}" class="border-black border-2 mb-4 ml-8 px-2 hover:text-blue-700 hover:border-blue-700">
                             Add size
-                        </router-link>
+                        </router-link> -->
                     </div>
 
 

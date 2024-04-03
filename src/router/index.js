@@ -27,6 +27,14 @@ import ProductImageCreatePage from '../pages/product_image/ProductImageCreatePag
 import ProductImageShowPage from '../pages/product_image/ProductImageShowPage.vue'
 import ProductImageEditPage from '../pages/product_image/ProductImageEditPage.vue'
 
+import ProductColorIndexPage from '../pages/product_color/ProductColorIndexPage.vue'
+import ProductColorCreatePage from '../pages/product_color/ProductColorCreatePage.vue'
+import ProductColorEditPage from '../pages/product_color/ProductColorEditPage.vue'
+
+import ProductSizeIndexPage from '../pages/product_size/ProductSizeIndexPage.vue'
+import ProductSizeCreatePage from '../pages/product_size/ProductSizeCreatePage.vue'
+import ProductSizeEditPage from '../pages/product_size/ProductSizeEditPage.vue'
+
 import OrderIndexPage from '../pages/order/OrderIndexPage.vue'
 import OrderCreatePage from '../pages/order/OrderCreatePage.vue'
 import OrderShowPage from '../pages/order/OrderShowPage.vue'
@@ -89,6 +97,16 @@ const router = createRouter({
         { path: 'product-image/:id', name: 'product_image.show', component: ProductImageShowPage, meta: { requiresAuth: true, isAdmin: true } },
         { path: 'product-image/:id/edit', name: 'product_image.edit', component: ProductImageEditPage, meta: { requiresAuth: true, isAdmin: true } },
         { path: 'product-image/:id/delete', name: 'product_image.delete', meta: { requiresAuth: true, isAdmin: true } },
+
+        { path: 'product-color', name: 'product_color.index', component: ProductColorIndexPage, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-color/:id/store', name: 'product_color.store', component: ProductColorCreatePage, props: true, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-color/:id/edit', name: 'product_color.edit', component: ProductColorEditPage, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-color/:id/delete', name: 'product_color.delete', meta: { requiresAuth: true, isAdmin: true } },
+
+        { path: 'product-size', name: 'product_size.index', component: ProductSizeIndexPage, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-size/:id/store', name: 'product_size.store', component: ProductSizeCreatePage, props: true, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-size/:id/edit', name: 'product_size.edit', component: ProductSizeEditPage, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'product-size/:id/delete', name: 'product_size.delete', meta: { requiresAuth: true, isAdmin: true } },
 
         { path: 'order', name: 'order.index', component: OrderIndexPage, meta: { requiresAuth: true, isAdmin: true } },
         { path: 'order/store', name: 'order.store', component: OrderCreatePage, meta: { requiresAuth: true, isAdmin: true } },
