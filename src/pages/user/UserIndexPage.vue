@@ -99,33 +99,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b dark:border-gray-700">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Kamal</th>
-                                <td class="px-4 py-3">Male</td>
-                                <td class="px-4 py-3">tk@gmail.com</td>
-                                <td class="px-4 py-3">9331111111</td>
-                                <td class="px-4 py-3">Yes</td>
-                                <td class="px-4 py-3">No</td>
-                                <td class="px-4 py-3"><img src="https://placehold.co/60x40" alt="">fire
-                                </td>
-                                <td class="px-4 py-3">1</td>
-                                <td class="px-4 py-3">2024-03-12</td>
-                                <td class="px-4 py-3 flex items-center justify-end">
-                                    <div class="flex flex-row">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
-                                            <li>
-                                                <router-link :to="{name: 'user.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                    <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                                    </svg>
-                                                </router-link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            <template v-for="u in users" :key="u.id">
+                                <tr class="border-b dark:border-gray-700">
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ u.id }}</th>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ u.name }}</th>
+                                    <td class="px-4 py-3">{{ u.gender }}</td>
+                                    <td class="px-4 py-3">{{u.email}}</td>
+                                    <td class="px-4 py-3">{{ u.phone }}</td>
+                                    <td class="px-4 py-3">{{ u.actvie }}</td>
+                                    <td class="px-4 py-3">{{ u.blocked }}</td>
+                                    <td class="px-4 py-3"><img :src="u.image" alt="">
+                                    </td>
+                                    <td class="px-4 py-3">{{ u.address_id }}</td>
+                                    <td class="px-4 py-3">{{ u.created_at }}</td>
+                                    <td class="px-4 py-3 flex items-center justify-end">
+                                        <div class="flex flex-row">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
+                                                <li>
+                                                    <router-link :to="{name: 'user.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                                        </svg>
+                                                    </router-link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                        </template>
                         </tbody>
                     </table>
                 </div>
@@ -174,3 +176,39 @@
         </div>
     </section>
 </template>
+
+<script>
+import { mapState } from 'pinia';
+import {useUserStore} from '@/stores/UserStore.js'
+
+export default {
+    data() {
+        return {
+            users: [],
+        }
+    },
+
+    methods: {
+        fetchUsers(query = {}) {
+            this.getUsers(query).then((res) => {
+                this.users = res.data;
+                console.log(res.data);
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                //
+            })
+        } ,
+    },
+
+    mounted() {
+        this.fetchUsers();
+    },
+
+    computed: {
+        ...mapState(useUserStore, ["getUsers"]),
+    }
+}
+
+
+</script>

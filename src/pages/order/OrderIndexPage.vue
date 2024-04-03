@@ -98,49 +98,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b dark:border-gray-700">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
-                                <td class="px-4 py-3">ldlfadjsf</td>
-                                <td class="px-4 py-3">2000</td>
-                                <td class="px-4 py-3">2200</td>
-                                <td class="px-4 py-3">2100</td>
-                                <td class="px-4 py-3">10%</td>
-                                <td class="px-4 py-3">1</td>
-                                <td class="px-4 py-3">MAR098</td>
-                                <td class="px-4 py-3">0</td>
-                                <td class="px-4 py-3 flex items-center justify-end">
-                                    <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        </svg>
-                                    </button>
-                                    <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
-                                            <li>
-                                                <router-link :to="{name: 'order.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</router-link>
-                                            </li>
-                                            <li>
-                                                <router-link :to="{name: 'order.edit', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</router-link>
-                                            </li>
-                                        </ul>
-                                        <div class="py-1">
-                                            <router-link :to="{name: 'order.delete', params: {id: 123}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</router-link>
+                            <template v-for="o in orders" :key="o.id">
+                                <tr class="border-b dark:border-gray-700">
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ o.id }}</th>
+                                    <td class="px-4 py-3">{{ o.rzp_order_id }}</td>
+                                    <td class="px-4 py-3">{{o.amount}}</td>
+                                    <td class="px-4 py-3">{{ o.gross_total }}</td>
+                                    <td class="px-4 py-3">{{ o.sub_total }}</td>
+                                    <td class="px-4 py-3">{{o.discount}}%</td>
+                                    <td class="px-4 py-3">{{ o.user_id }}</td>
+                                    <td class="px-4 py-3">{{o.applied_coupon_id}}</td>
+                                    <td class="px-4 py-3">{{ o.status }}</td>
+                                    <td class="px-4 py-3 flex items-center justify-end">
+                                        <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            </svg>
+                                        </button>
+                                        <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                <li>
+                                                    <router-link :to="{name: 'order.show', params: {id: o.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</router-link>
+                                                </li>
+                                                <li>
+                                                    <router-link :to="{name: 'order.edit', params: {id: o.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</router-link>
+                                                </li>
+                                            </ul>
+                                            <div class="py-1">
+                                                <router-link :to="{name: 'order.delete', params: {id: o.id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</router-link>
+                                            </div>
+                                        </div> -->
+                                        <div class="flex flex-row">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
+                                                <li>
+                                                    <router-link :to="{name: 'order.show', params: {id: o.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                                        </svg>
+                                                    </router-link>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div> -->
-                                    <div class="flex flex-row">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
-                                            <li>
-                                                <router-link :to="{name: 'order.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                    <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                                    </svg>
-                                                </router-link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
@@ -194,13 +196,37 @@
 import {onMounted} from 'vue'
 import {initDropdowns} from 'flowbite'
 
+import { mapState } from 'pinia';
+import {useOrderStore} from '@/stores/OrderStore.js'
 
 export default {
-    setup() {
-        onMounted(() => {
-            initDropdowns();
-        })
+    data() {
+        return {
+            orders: [],
+        }
+    },
+
+    methods: {
+        fetchOrders(query = {}) {
+            this.getOrders(query).then((res) => {
+                this.orders = res.data;
+                console.log(res.data);
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                //
+            })
+        } ,
+    },
+
+    mounted() {
+        this.fetchOrders();
+    },
+
+    computed: {
+        ...mapState(useOrderStore, ["getOrders"]),
     }
 }
+
 
 </script>
