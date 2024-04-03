@@ -172,6 +172,7 @@
 <script>
 import { mapState } from 'pinia';
 import {usePaymentStore} from '@/stores/PaymentStore.js'
+import { initDropdowns } from 'flowbite';
 
 export default {
     data() {
@@ -195,6 +196,7 @@ export default {
 
     mounted() {
         this.fetchPayments();
+        initDropdowns();
     },
 
     computed: {

@@ -180,6 +180,7 @@
 <script>
 import { mapState } from 'pinia';
 import {useUserStore} from '@/stores/UserStore.js'
+import { initDropdowns } from 'flowbite';
 
 export default {
     data() {
@@ -203,6 +204,7 @@ export default {
 
     mounted() {
         this.fetchUsers();
+        initDropdowns();
     },
 
     computed: {

@@ -199,6 +199,7 @@
 <script>
 import { mapState } from 'pinia';
 import {useCouponStore} from '@/stores/CouponStore.js'
+import { initDropdowns } from 'flowbite';
 
 export default {
     data() {
@@ -222,6 +223,7 @@ export default {
 
     mounted() {
         this.fetchCoupons();
+        initDropdowns();
     },
 
     computed: {

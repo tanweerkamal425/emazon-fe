@@ -203,6 +203,7 @@ export default {
 
     mounted() {
         this.fetchSizes();
+        initDropdowns();
     },
 
     computed: {

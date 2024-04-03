@@ -100,7 +100,7 @@
                             <template v-for="p in products" :key="p.id">
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{p.id}}</th>
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ p.title }};</th>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ p.title }}</th>
                                     <td class="px-4 py-3">{{ p.category.name}}</td>
                                     <td class="px-4 py-3">{{p.price_sp}}</td>
                                     <td class="px-4 py-3">{{p.price_mp}}</td>

@@ -222,6 +222,7 @@ export default {
 
     mounted() {
         this.fetchCategories();
+        initDropdowns();
     },
 
     computed: {
