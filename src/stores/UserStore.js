@@ -20,6 +20,20 @@ export const useUserStore = defineStore("user", {
                     reject(err);
                 })
             });
+        },
+
+        getUser(id) {
+            const url = `/api/v1/users/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // console.log(res.data);
+                    // this.users = res.data.data;
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })

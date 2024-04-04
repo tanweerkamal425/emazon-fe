@@ -20,6 +20,18 @@ export const usePaymentStore = defineStore("payment", {
                     reject(err);
                 })
             });
+        },
+
+        getPayment(id) {
+            const url = `/api/v1/payments/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
         }
     }
 })

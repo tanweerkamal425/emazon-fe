@@ -20,6 +20,20 @@ export const useColorStore = defineStore("color", {
                     reject(err);
                 })
             });
+        },
+
+        getAllColors(query) {
+            const url = '/api/v1/colors/all';
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // console.log(res.data);
+                    this.color = res.data.data;
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })

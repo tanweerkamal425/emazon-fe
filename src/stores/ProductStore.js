@@ -51,6 +51,36 @@ export const useProductStore = defineStore("product", {
                 });
             });
 
-        }
+        },
+
+        storeColor(id, colors) {
+            const url = `/api/v1/products/${id}/color-variants`
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, colors).then((data) => {
+                    console.log(data);
+                    resolve(data);
+                }).catch((error) => {
+                    reject(error);
+                    console.error(error);
+                });
+            });
+
+        },
+
+        storeSize(id, sizes) {
+            const url = `/api/v1/products/${id}/size-variants`
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, sizes).then((data) => {
+                    console.log(data);
+                    resolve(data);
+                }).catch((error) => {
+                    console.error(error);
+                    reject(error);
+                });
+            });
+
+        },
     }
 })

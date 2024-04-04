@@ -20,6 +20,18 @@ export const useOrderStore = defineStore("order", {
                     reject(err);
                 })
             });
+        },
+
+        getOrder(id) {
+            const url = `/api/v1/orders/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
         }
     }
 })

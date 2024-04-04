@@ -20,6 +20,18 @@ export const useCategoryStore = defineStore("category", {
                     reject(err);
                 })
             });
+        },
+
+        getCategory(id) {
+            const url = `/api/v1/categories/${id}`;
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                    // console.error(err);
+                })
+            })
         }
     }
 })

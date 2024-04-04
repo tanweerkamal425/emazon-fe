@@ -1,115 +1,257 @@
 <template>
-<section v-if="product" class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-            <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Apple iMac 25"</h2>
-            <h4 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Apple iMac 25"</h4>
-
-
-
-            <Carousel />
-
-            <dl>
-                <router-link :to="{name: 'product_image.store', params: {id: product.id}}" class="border-black border-2 mt-4 px-2 hover:text-blue-700 hover:border-blue-700">
-                    Add image
-                </router-link>
-                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white mt-4">Description</dt>
-                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory, Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage, Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.</dd>
-            </dl>
-            <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">$2999</p>
-            <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white">$3199</p>
-            <dl class="flex items-center space-x-6">
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Electronics/PC</dd>
-                </div>
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Item weight</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
-                </div>
-            </dl>
-            <dl class="flex items-center space-x-6">
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Size</dt>
-                    <div class="flex flex-row gap-x-2">
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">S</dd>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">M</dd>
-                        <!-- <router-link :to="{name: 'size.store'}" class="border-black border-2 mb-4 ml-8 px-2 hover:text-blue-700 hover:border-blue-700">
-                            Add size
-                        </router-link> -->
+<div v-if="product" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <tbody>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <td class="">
+                    <img class="h-auto max-w-lg rounded-lg" :src="product.image_url" alt="image description">
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.id }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Title
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.title }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Subtitle
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.subtitle }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Category
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.category.name }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Colors
+                </th>
+                <td class="px-6 py-4">
+                    <form @submit.prevent="storeColors">
+                    <div class="flex gap-x-4">
+                            <div v-for="c in colors" :key="c.id">
+                                <div class="flex items-center mb-4">
+                                    <input name="colors" id="default-checkbox" type="checkbox" :value="c.id" v-model="checkedColors" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ c.color }}</label>
+                                </div>
+                            </div>
+                        <Button name="Add" />
+                        <!-- <Modal :color="colors" :colorsCheck="checkedColors" /> -->
                     </div>
-
-
-                </div>
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Color</dt>
-                    <div class="flex flex-row gap-x-2">
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Red</dd>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Green</dd>
-                        <router-link :to="{name: 'color.store'}" class="border-black border-2 mb-4 ml-8 px-2 hover:text-blue-700 hover:border-blue-700">
-                            Add color
-                        </router-link>
-                    </div>
-                </div>
-            </dl>
-            <dl class="flex items-center space-x-6">
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Returnablie</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">No</dd>
-                </div>
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Published</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Yes</dd>
-                </div>
-            </dl>
-            <dl class="flex items-center space-x-6">
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Created at</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">2024-03-13</dd>
-                </div>
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Updated at</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">2024-03-13</dd>
-                </div>
-                <div>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Published at</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">2024-03-13</dd>
-                </div>
-            </dl>
-            <div class="flex items-center space-x-4">
-                <button type="button" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                    Edit
-                </button>   
-                <button type="button" class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                    <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                    Delete
-                </button> 
-            </div>
-        </div>
-</section>
+                </form>
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Sizes
+                </th>
+                <td class="px-6 py-4">
+                    <form @submit.prevent="storeSizes">
+                        <div class="flex items-center gap-x-4">
+                            <div v-for="s in sizes" :key="s.id">
+                                <div class="flex items-center mb-4">
+                                    <input name="sizes" id="default-checkbox" type="checkbox" :value="s.id" v-model="checkedSizes" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ s.size }}</label>
+                                </div>
+                            </div>
+                            <Button name="Add" />
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Description
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.description }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Status
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.price_mp }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    User ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.price_sp }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Code
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.code }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Published
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.is_published == 0 ? 'No' : 'Yes' }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Returnable
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.is_returnable == 0 ? 'No' : 'Yes' }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Created At
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.created_at }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Updated At
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.updated_at }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Published At
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.published_at }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </template>
 
-<script setup>
-import Carousel from '../../components/flowbite/Carousel.vue';
-import {onMounted} from 'vue'
-import {initCarousels} from 'flowbite'
+<script>
+
 import { useProductStore } from '@/stores/ProductStore.js';
-import { ref } from 'vue';
+import {useSizeStore} from '@/stores/SizeStore.js';
+import {useColorStore} from '@/stores/ColorStore.js';
 import { useRoute } from 'vue-router';
+import { mapState } from 'pinia';
+import Button from '../../components/flowbite/Button.vue'
+import Modal from '../../components/Modal.vue'
 
-const product = ref(null);
+export default {
+    components: {
+        Modal,
+        Button,
+    },
+    data() {
+        return {
+            product: null,
+            colors: [],
+            sizes: [],
+            images: [],
+            checkedSizes: [],
+            checkedColors: [],
+            route: null,
+        }
+    },
 
-onMounted(() => {
-    initCarousels();
-    const route = useRoute();
-    fetchProduct(route.params.id);
-});
+    methods: {
+        fetchProduct(id) {
+            this.getProduct(id).then((data) => {
+                console.log(data);
+                this.product = data.product;
+                console.log(this.product);
+                this.checkedColors = data.colors.map((c) => c.id);
+                this.checkedSizes = data.sizes.map((s) => s.id);
+                this.images = data.images;
+            }).catch((err) => {
+                console.error(err);
+            });
+        },
 
-const fetchProduct = (id) => {
-    useProductStore().getProduct(id).then((data) => {
-        console.log(data);
-        product.value = data.data;
-    });
+        allSizes() {
+            this.getAllSizes().then((res) => {
+                this.sizes = res.data;
+                console.log(this.sizes);
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+
+        allColors() {
+            this.getAllColors().then((res) => {
+                this.colors = res.data;
+                console.log(this.colors);
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+
+        storeColors() {
+            console.log('clicked')
+            this.storeColor(this.route.params.id, {colors: this.checkedColors}).then((res) => {
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+
+        storeSizes() {
+            console.log('clicked')
+            this.storeSize(this.route.params.id, {sizes: this.checkedSizes}).then((res) => {
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+
+
+        
+    },
+
+    mounted() {
+        this.route = useRoute();
+        this.fetchProduct(this.route.params.id);
+        this.allSizes();
+        this.allColors();
+    },
+
+    computed: {
+        ...mapState(useProductStore, ["getProduct", "storeColor", "storeSize"]),
+        ...mapState(useSizeStore, ["getAllSizes"]),
+        ...mapState(useColorStore, ["getAllColors"]),
+    }
 }
+
+
+
+
+;
+
 
 </script>

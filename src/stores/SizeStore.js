@@ -19,6 +19,19 @@ export const useSizeStore = defineStore("size", {
                     reject(err);
                 })
             });
+        },
+
+        getAllSizes() {
+            const url = '/api/v1/sizes/all';
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // console.log(res.data);
+                    this.sizes = res.data.data;
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })
