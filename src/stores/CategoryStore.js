@@ -47,6 +47,28 @@ export const useCategoryStore = defineStore("category", {
                     // console.error(err);
                 })
             })
+        },
+
+        addCategory(category) {
+            const url = '/api/v1/categories';
+            return new Promise((resolve, reject) => {
+                axios.post(url, category).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
+        },
+
+        editCategory(id, category) {
+            const url = `/api/v1/categories/${id}`;
+            return new Promise((resolve, reject) => {
+                axios.patch(url, category).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
         }
     }
 })

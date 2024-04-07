@@ -211,7 +211,6 @@ export default {
         fetchCategories(query = {}) {
             this.getCategories(query).then((res) => {
                 this.categories = res.data;
-                console.log(this.categories);
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
