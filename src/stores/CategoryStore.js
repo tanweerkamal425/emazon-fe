@@ -22,6 +22,21 @@ export const useCategoryStore = defineStore("category", {
             });
         },
 
+        getAllCategories() {
+            const url = '/api/v1/categories/all';
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // this.categories = res.data;
+                    // console.log(res.data);
+                    resolve(res);
+                }).catch((err) => {
+                    console.error(err);
+                    reject(err);
+                })
+            })
+        },
+
         getCategory(id) {
             const url = `/api/v1/categories/${id}`;
             return new Promise((resolve, reject) => {

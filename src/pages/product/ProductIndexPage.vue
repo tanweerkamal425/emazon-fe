@@ -246,18 +246,13 @@ import {useProductStore} from '@/stores/ProductStore.js'
 import {mapState} from 'pinia'
 
 
-export default {
-    // setup() {
-    //     onMounted(() => {
-    //         initDropdowns();
-    //         initTooltips();
-    //         initModals();
-    //     })
-    // },
 
+
+export default {
     data() {
         return {
             products: [],
+            toast: null
         }
     },
 
@@ -272,6 +267,9 @@ export default {
 				//
 			});
 		},
+        show() {
+            this.$toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
+        }
     },
 
     mounted() {

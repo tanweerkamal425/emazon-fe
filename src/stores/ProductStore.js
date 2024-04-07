@@ -23,13 +23,36 @@ export const useProductStore = defineStore("product", {
         },
 
         getProduct(id) {
-            console.log("OOOOOKKKKK")
             const url = `/api/v1/products/${id}`;
 
             return new Promise((resolve, reject) => {
                 axios.get(url).then((res) => {
                     // console.log(res.data);
                     resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
+        },
+
+        addProduct(product) {
+            const url = '/api/v1/products';
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, product).then((res) => {
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
+        },
+
+        editProduct(id, product) {
+            const url = `/api/v1/products/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.patch(url, product).then((res) => {
+                    resolve(res);
                 }).catch((err) => {
                     reject(err);
                 })
@@ -48,6 +71,7 @@ export const useProductStore = defineStore("product", {
                     resolve(data);
                 }).catch((error) => {
                     console.error(error);
+                    reject(error);
                 });
             });
 
@@ -61,8 +85,8 @@ export const useProductStore = defineStore("product", {
                     console.log(data);
                     resolve(data);
                 }).catch((error) => {
-                    reject(error);
                     console.error(error);
+                    reject(error);
                 });
             });
 

@@ -183,9 +183,7 @@ export default {
     methods: {
         fetchProduct(id) {
             this.getProduct(id).then((data) => {
-                console.log(data);
                 this.product = data.product;
-                console.log(this.product);
                 this.checkedColors = data.colors.map((c) => c.id);
                 this.checkedSizes = data.sizes.map((s) => s.id);
                 this.images = data.images;
@@ -197,7 +195,6 @@ export default {
         allSizes() {
             this.getAllSizes().then((res) => {
                 this.sizes = res.data;
-                console.log(this.sizes);
             }).catch((err) => {
                 console.log(err);
             })
@@ -206,7 +203,6 @@ export default {
         allColors() {
             this.getAllColors().then((res) => {
                 this.colors = res.data;
-                console.log(this.colors);
             }).catch((err) => {
                 console.log(err);
             })
@@ -215,7 +211,6 @@ export default {
         storeColors() {
             console.log('clicked')
             this.storeColor(this.route.params.id, {colors: this.checkedColors}).then((res) => {
-                console.log(res.data);
             }).catch((err) => {
                 console.log(err);
             })
@@ -224,14 +219,10 @@ export default {
         storeSizes() {
             console.log('clicked')
             this.storeSize(this.route.params.id, {sizes: this.checkedSizes}).then((res) => {
-                console.log(res.data);
             }).catch((err) => {
                 console.log(err);
             })
         }
-
-
-        
     },
 
     mounted() {
