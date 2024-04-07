@@ -32,6 +32,30 @@ export const useCouponStore = defineStore("coupon", {
                     reject(err);
                 })
             });
+        },
+
+        addCoupon(coupon) {
+            const url = '/api/v1/coupons/';
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, coupon).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
+        },
+
+        editCoupon(id, coupon) {
+            const url = `/api/v1/coupons/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.patch(url, coupon).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })
