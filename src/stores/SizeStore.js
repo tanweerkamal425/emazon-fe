@@ -32,6 +32,30 @@ export const useSizeStore = defineStore("size", {
                     reject(err);
                 })
             });
+        },
+
+        getSize(id) {
+            const url = `/api/v1/sizes/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res);
+                }).catch((err => {
+                    reject(err);
+                }))
+            })
+        },
+
+        editSize(id, size) {
+            const url = `/api/v1/sizes/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.patch(url, size).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
         }
     }
 })
