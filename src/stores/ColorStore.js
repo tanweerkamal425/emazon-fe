@@ -34,6 +34,42 @@ export const useColorStore = defineStore("color", {
                     reject(err);
                 })
             });
+        },
+
+        getColor(id) {
+            const url = `/api/v1/colors/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
+        },
+
+        addColor(color) {
+            const url = '/api/v1/colors/';
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, color).then((res) => {
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
+        },
+
+        editColor(id, color) {
+            const url = `/api/v1/colors/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.patch(url, color).then((res) => {
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })
