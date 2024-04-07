@@ -46,6 +46,18 @@ export const useSizeStore = defineStore("size", {
             })
         },
 
+        addSize(size) {
+            const url = '/api/v1/sizes';
+
+            return new Promise((resolve, reject) => {
+                axios.post(url, size).then((res) => {
+                    resolve(res);
+                }).catch((err => {
+                    reject(err);
+                }))
+            })
+        },
+
         editSize(id, size) {
             const url = `/api/v1/sizes/${id}`;
 

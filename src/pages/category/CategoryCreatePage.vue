@@ -23,7 +23,7 @@ export default {
         onAddCategory() {
             this.addCategory(this.category).then((res) => {
                 console.log('category added successfully');
-                this.$router.push({name: 'category.index'});
+                this.$router.push({name: 'category.index'})
             }).catch((err) => {
                 console.error(err);
             })
