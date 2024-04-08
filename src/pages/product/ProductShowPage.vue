@@ -1,12 +1,23 @@
 <template>
 <div v-if="product" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div>
+        <fwb-img
+        alt="flowbite-vue"
+        :src="product.image_url"
+        />
+        <Button name="Upload" />
+    </div>
+    <Gallery :imageArr="images" />
+    <div v-show="showForm">
+        <ProductImageForm @upload-image="onUploadImage" @file-select="onFileSelect" @close-form="onCloseForm" />
+    </div>
+    <div v-show="showButton">
+        <button @click="onShowForm" class="plus-btn" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+        </button>
+    </div>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <tbody>
-            <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="">
-                    <img class="h-auto max-w-lg rounded-lg" :src="product.image_url" alt="image description">
-                </td>
-            </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                     ID
@@ -162,11 +173,17 @@ import { useRoute } from 'vue-router';
 import { mapState } from 'pinia';
 import Button from '../../components/flowbite/Button.vue'
 import Modal from '../../components/Modal.vue'
+import Gallery from '@/components/flowbite/Gallery.vue'
+import ProductImageForm from './ProductImageForm.vue';
+import { FwbImg } from 'flowbite-vue'
 
 export default {
     components: {
         Modal,
         Button,
+        Gallery,
+        ProductImageForm,
+        FwbImg
     },
     data() {
         return {
@@ -174,9 +191,13 @@ export default {
             colors: [],
             sizes: [],
             images: [],
+            image: {},
             checkedSizes: [],
             checkedColors: [],
             route: null,
+            showForm: false,
+            showButton: true,
+            file: null
         }
     },
 
@@ -187,6 +208,7 @@ export default {
                 this.checkedColors = data.colors.map((c) => c.id);
                 this.checkedSizes = data.sizes.map((s) => s.id);
                 this.images = data.images;
+                console.log(this.images);
             }).catch((err) => {
                 console.error(err);
             });
@@ -222,6 +244,35 @@ export default {
             }).catch((err) => {
                 console.log(err);
             })
+        },
+
+        onShowForm() {
+            this.showForm = true;
+            this.showButton = false;
+        },
+
+        onCloseForm() {
+            this.showForm = false;
+            this.showButton = true;
+        },
+        onUploadImage() {
+            this.uploadImage(this.route.params.id, this.file).then((data) => {
+                console.log("SUCCESS", data);
+                this.getLatestImage(this.route.params.id).then((res) => {
+                    this.image =res.data.data;
+                    this.images = [...this.images, this.image];
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }).catch((error) => {
+                console.error(error);
+            })
+        },
+
+        onFileSelect(file) {
+            this.file = file;
+            console.log(file);
+
         }
     },
 
@@ -233,16 +284,33 @@ export default {
     },
 
     computed: {
-        ...mapState(useProductStore, ["getProduct", "storeColor", "storeSize"]),
+        ...mapState(useProductStore, ["getProduct", "storeColor", "storeSize", "uploadImage", "getLatestImage"]),
         ...mapState(useSizeStore, ["getAllSizes"]),
         ...mapState(useColorStore, ["getAllColors"]),
     }
 }
-
-
-
-
-;
-
-
 </script>
+
+<style>
+.plus-btn {
+    width: 50px;
+    height: 50px;
+}
+
+.form {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+} 
+
+.close-btn {
+    width: 20px;
+    height: 20px;
+    align-self: flex-end;
+}
+
+.close-btn:hover {
+    color: red;
+}
+</style>

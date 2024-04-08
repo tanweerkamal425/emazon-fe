@@ -20,6 +20,6 @@ export const useProductImageStore = defineStore("product_image", {
                     reject(err);
                 })
             });
-        }
+        },
     }
 })

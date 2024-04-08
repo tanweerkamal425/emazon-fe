@@ -77,6 +77,17 @@ export const useProductStore = defineStore("product", {
 
         },
 
+        getLatestImage(id) {
+            const url = `/api/v1/product-images/${id}/latest-image`;
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
+        },
+
         storeColor(id, colors) {
             const url = `/api/v1/products/${id}/color-variants`
 
