@@ -77,6 +77,23 @@ export const useProductStore = defineStore("product", {
 
         },
 
+        defaultUpload(id, file) {
+            const url = `/api/v1/products/${id}/images`;
+
+            const form = new FormData();
+            form.append('image_url', file);
+            
+            return new Promise((resolve, reject) => {
+                axios.post(url, form).then((data) => {
+                    console.log(data);
+                    resolve(data);
+                }).catch((error) => {
+                    console.error(error);
+                    reject(error);
+                });
+            });
+        },
+
         getLatestImage(id) {
             const url = `/api/v1/product-images/${id}/latest-image`;
             return new Promise((resolve, reject) => {

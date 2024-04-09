@@ -5,17 +5,18 @@
         alt="flowbite-vue"
         :src="product.image_url"
         />
-        <Button name="Upload" />
     </div>
+    <DefaultProductImageModal @default-upload="onDefaultUpload" @file-select="onFileSelect" />
     <Gallery :imageArr="images" />
-    <div v-show="showForm">
+    <ProductImageModal @upload-image="onUploadImage" @file-select="onFileSelect" />
+    <!-- <div v-show="showForm">
         <ProductImageForm @upload-image="onUploadImage" @file-select="onFileSelect" @close-form="onCloseForm" />
     </div>
     <div v-show="showButton">
         <button @click="onShowForm" class="plus-btn" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
         </button>
-    </div>
+    </div> -->
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <tbody>
             <tr class="border-b border-gray-200 dark:border-gray-700">
@@ -176,6 +177,8 @@ import Modal from '../../components/Modal.vue'
 import Gallery from '@/components/flowbite/Gallery.vue'
 import ProductImageForm from './ProductImageForm.vue';
 import { FwbImg } from 'flowbite-vue'
+import ProductImageModal from './ProductImageModal.vue';
+import DefaultProductImageModal from './DefaultProductImageModal.vue';
 
 export default {
     components: {
@@ -183,7 +186,9 @@ export default {
         Button,
         Gallery,
         ProductImageForm,
-        FwbImg
+        FwbImg,
+        ProductImageModal,
+        DefaultProductImageModal
     },
     data() {
         return {
@@ -255,19 +260,33 @@ export default {
             this.showForm = false;
             this.showButton = true;
         },
-        onUploadImage() {
+
+        onUploadImage(isDefault) {
+            // console.log(this.file);
             this.uploadImage(this.route.params.id, this.file).then((data) => {
                 console.log("SUCCESS", data);
                 this.getLatestImage(this.route.params.id).then((res) => {
-                    this.image =res.data.data;
+                    this.image = res.data.data;
                     this.images = [...this.images, this.image];
                 }).catch((err) => {
                     console.log(err);
                 })
             }).catch((error) => {
                 console.error(error);
-            })
+            }) 
         },
+
+        onDefaultUpload() {
+            this.defaultUpload(this.route.params.id, this.file).then((res) => {
+                console.log('success');
+                this.getProduct(this.route.params.id).then((res) => {
+                    this.image = res.product.image_url;
+                    this.product.image_url = this.image;
+                })
+            }).catch((err) => {
+                console.log(err);
+            })
+        },  
 
         onFileSelect(file) {
             this.file = file;
@@ -284,10 +303,10 @@ export default {
     },
 
     computed: {
-        ...mapState(useProductStore, ["getProduct", "storeColor", "storeSize", "uploadImage", "getLatestImage"]),
+        ...mapState(useProductStore, ["getProduct", "storeColor", "storeSize", "uploadImage", "getLatestImage", "defaultUpload"]),
         ...mapState(useSizeStore, ["getAllSizes"]),
         ...mapState(useColorStore, ["getAllColors"]),
-    }
+    },
 }
 </script>
 
