@@ -1,4 +1,5 @@
 <template>
+    <h1 class="text-2xl mb-4">Payment</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <!-- <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -19,34 +20,59 @@
         </thead> -->
         <tbody>
             <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="">
-                    <img class="h-auto max-w-lg rounded-lg" src="https://media.istockphoto.com/id/1302787124/photo/beige-leather-women-handbag-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=fOO0zCBqF3rbiGLLHwgtOMHxt66adpKikE7Fs2C_fDs=" alt="image description">
-                </td>
-            </tr>
-            
-
-            <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                     ID
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.id }}
+                    {{ payment.id }}
                 </td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                    Name
+                    Amount
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.name }}
+                    {{ payment.amount }}
                 </td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                    Parent ID
+                    Order Group ID
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.parent_id }}
+                    {{ payment.order_group_id }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    PG Payment ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ payment.pg_payment_id }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Mode
+                </th>
+                <td class="px-6 py-4">
+                    {{ payment.mode }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Status
+                </th>
+                <td class="px-6 py-4">
+                    {{ payment.status }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    User ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ payment.user_id }}
                 </td>
             </tr>
             <tr>
@@ -54,7 +80,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.created_at }}
+                    {{ payment.created_at }}
                 </td>
             </tr>
             <tr>
@@ -62,54 +88,18 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.updated_at }}
+                    {{ payment.updated_at }}
                 </td>
             </tr>
         </tbody>
     </table>
     </div>
-
-    <ProductTable :products="products" />
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
-import {useCategoryStore} from '@/stores/CategoryStore'
-import { mapState } from 'pinia';
-import ProductTable from '../product/ProductTable.vue';
-
 export default {
-    components: {
-        ProductTable
-    },
-
-    data() {
-        return {
-            category: {},
-            products: [],
-        }
-    },
-
-    methods: {
-        fetchCategory(id) {
-            this.getCategory(id).then((res) => {
-                this.category = res.data[0];
-                this.products = res.data[0].products;
-                console.log(this.products);
-            }).catch((err) => {
-                console.error(err);
-            })
-        }
-    },
-
-    mounted() {
-        const route = useRoute();
-        this.fetchCategory(route.params.id);
-    },
-
-    computed: {
-        ...mapState(useCategoryStore, ["getCategory"])
+    props: {
+        payment: Object
     }
 }
 </script>
-

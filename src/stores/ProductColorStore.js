@@ -20,6 +20,19 @@ export const useProductColorStore = defineStore("product_color", {
                     reject(err);
                 })
             });
+        },
+
+        getProductWithColor(id) {
+            const url = `/api/v1/product-colors/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // console.log(res.data);
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })

@@ -1,7 +1,7 @@
 <template>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-auto">
-            <h1 class="text-2xl mb-4">Product Colors</h1>
+            <h1 class="text-2xl mb-4">Products</h1>
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -71,11 +71,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <router-link :to="{name: 'product_color.store', params: {id: 123}}" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <router-link :to="{name: 'product.store'}" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
-                            Add image
+                            Add product
                         </router-link>
                     </div>
                 </div>
@@ -84,25 +84,41 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">ID</th>
-                                <th scope="col" class="px-4 py-3">Product ID</th>
-                                <th scope="col" class="px-4 py-3">Color ID</th>
+                                <th scope="col" class="px-4 py-3">Title</th>
+                                <th scope="col" class="px-4 py-3">Category</th>
+                                <th scope="col" class="px-4 py-3">Price Sp</th>
+                                <th scope="col" class="px-4 py-3">Price Mp</th>
+                                <th scope="col" class="px-4 py-3">Description</th>
+                                <th scope="col" class="px-4 py-3">Created at</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="pc in product_colors" :key="pc.id">
+
+                            <template v-for="p in products" :key="p.id">
                                 <tr class="border-b dark:border-gray-700">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ pc.id }}</th>
-                                    <td class="px-4 py-3">{{ pc.product_id }}</td>
-                                    <!-- <td class="px-4 py-3"><img src="https://placehold.co/60x40" alt=""></td> -->
-                                    <td class="px-4 py-3">{{ pc.color_id }}</td>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{p.id}}</th>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ p.title }}</th>
+                                    <td v-if="p.category" class="px-4 py-3">{{ p.category.name}}</td>
+                                    <td v-else class="px-4 py-3">{{ p.category_id}}</td>
+                                    <td class="px-4 py-3">{{p.price_sp}}</td>
+                                    <td class="px-4 py-3">{{p.price_mp}}</td>
+                                    <td class="px-4 py-3">{{p.description}}</td>
+                                    <td class="px-4 py-3">2024-03-12</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
+                                        <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            </svg>
+                                        </button> -->
+
+
                                         <div class="flex flex-row">
                                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">
                                                 <li>
-                                                    <router-link :to="{name: 'product_color.show', params: {id: pc.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <router-link :to="{name: 'product.show', params: {id: p.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
                                                         <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -110,24 +126,69 @@
                                                     </router-link>
                                                 </li>
                                                 <li>
-                                                    <router-link :to="{name: 'product_image.edit', params: {id: pc.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <router-link :to="{name: 'product.edit', params: {id: p.id}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                         </svg>
                                                     </router-link>
                                                 </li>
                                             </ul>
-                                            <div class="py-1">
-                                                <router-link :to="{name: 'product_image.delete', params: {id: pc.id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                            <!-- <div class="py-1">
+                                                <router-link :to="{name: 'product.delete', params: {id: p.id}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
                                                     </svg>
                                                 </router-link>
+                                            </div> -->
+                                            <div class="flex justify-center">
+                                                <button id="deleteButton" data-modal-target="deleteModal" data-modal-toggle="deleteModal" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div id="deleteModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                                    <!-- Modal content -->
+                                                    <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                                        <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteModal">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                            <span class="sr-only">Close modal</span>
+                                                        </button>
+                                                        <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                                        <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this item?</p>
+                                                        <div class="flex justify-center items-center space-x-4">
+                                                            <button data-modal-toggle="deleteModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                                No, cancel
+                                                            </button>
+                                                            <button type="submit" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                                                Yes, I'm sure
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
+
+                                        <!-- <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                <li>
+                                                    <router-link :to="{name: 'product.show', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</router-link>
+                                                </li>
+                                                <li>
+                                                    <router-link :to="{name: 'product.edit', params: {id: 123}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</router-link>
+                                                </li>
+                                            </ul>
+                                            <div class="py-1">
+                                                <router-link :to="{name: 'product.delete', params: {id: 123}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</router-link>
+                                            </div>
+                                        </div> -->
                                     </td>
                                 </tr>
-                        </template>
+                            </template>
+
+
                         </tbody>
                     </table>
                 </div>
@@ -178,42 +239,9 @@
 </template>
 
 <script>
-// import {onMounted} from 'vue'
-import {initDropdowns, initTooltips, initModals} from 'flowbite'
-import axios from 'axios'
-
-import {useProductColorStore} from '@/stores/ProductColorStore.js'
-import {mapState} from 'pinia'
-
-
 export default {
-
-    data() {
-        return {
-            product_colors: [],
-        }
-    },
-
-    methods: {
-        fetchProductColors(query = {}) {
-			this.getProductColors(query).then((data) => {
-				this.product_colors = data.data;
-                console.log(data.data);
-			}).catch((error) => {
-				console.error(error);
-			}).finally(() => {
-				//
-			});
-		},
-    },
-
-    mounted() {
-        this.fetchProductColors();
-        initDropdowns();
-    },
-
-    computed: {
-        ...mapState(useProductColorStore, ['getProductColors'])
+    props: {
+        products: Array
     }
 }
 </script>

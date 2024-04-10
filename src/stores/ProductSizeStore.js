@@ -20,6 +20,19 @@ export const useProductSizeStore = defineStore("product_size", {
                     reject(err);
                 })
             });
+        },
+
+        getProductWithSize(id) {
+            const url = `/api/v1/product-sizes/${id}`;
+
+            return new Promise((resolve, reject) => {
+                axios.get(url).then((res) => {
+                    // console.log(res.data);
+                    resolve(res.data);
+                }).catch((err) => {
+                    reject(err);
+                })
+            });
         }
     }
 })

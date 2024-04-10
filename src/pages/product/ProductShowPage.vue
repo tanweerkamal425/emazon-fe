@@ -163,6 +163,7 @@
         </tbody>
     </table>
 </div>
+
 </template>
 
 <script>
@@ -188,7 +189,7 @@ export default {
         ProductImageForm,
         FwbImg,
         ProductImageModal,
-        DefaultProductImageModal
+        DefaultProductImageModal,
     },
     data() {
         return {
@@ -210,6 +211,7 @@ export default {
         fetchProduct(id) {
             this.getProduct(id).then((data) => {
                 this.product = data.product;
+                console.log(data);
                 this.checkedColors = data.colors.map((c) => c.id);
                 this.checkedSizes = data.sizes.map((s) => s.id);
                 this.images = data.images;

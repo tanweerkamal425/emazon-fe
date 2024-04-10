@@ -1,4 +1,5 @@
 <template>
+    <h1 class="text-2xl mb-4">Order</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <!-- <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -19,34 +20,59 @@
         </thead> -->
         <tbody>
             <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="">
-                    <img class="h-auto max-w-lg rounded-lg" src="https://media.istockphoto.com/id/1302787124/photo/beige-leather-women-handbag-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=fOO0zCBqF3rbiGLLHwgtOMHxt66adpKikE7Fs2C_fDs=" alt="image description">
-                </td>
-            </tr>
-            
-
-            <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                    ID
+                    Rzp Order ID
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.id }}
+                    {{ order.id }}
                 </td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                    Name
+                    Rzp Order ID
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.name }}
+                    {{ order.rzp_order_id }}
                 </td>
             </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                    Parent ID
+                    Gross Total
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.parent_id }}
+                    {{ order.gross_total }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Sub Total
+                </th>
+                <td class="px-6 py-4">
+                    {{ order.sub_total }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Discount
+                </th>
+                <td class="px-6 py-4">
+                    {{ order.discount }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    Status
+                </th>
+                <td class="px-6 py-4">
+                    {{ order.status }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    User ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ order.user_id }}
                 </td>
             </tr>
             <tr>
@@ -54,7 +80,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.created_at }}
+                    {{ order.created_at }}
                 </td>
             </tr>
             <tr>
@@ -62,54 +88,18 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.updated_at }}
+                    {{ order.updated_at }}
                 </td>
             </tr>
         </tbody>
     </table>
-    </div>
-
-    <ProductTable :products="products" />
+</div>
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
-import {useCategoryStore} from '@/stores/CategoryStore'
-import { mapState } from 'pinia';
-import ProductTable from '../product/ProductTable.vue';
-
 export default {
-    components: {
-        ProductTable
-    },
-
-    data() {
-        return {
-            category: {},
-            products: [],
-        }
-    },
-
-    methods: {
-        fetchCategory(id) {
-            this.getCategory(id).then((res) => {
-                this.category = res.data[0];
-                this.products = res.data[0].products;
-                console.log(this.products);
-            }).catch((err) => {
-                console.error(err);
-            })
-        }
-    },
-
-    mounted() {
-        const route = useRoute();
-        this.fetchCategory(route.params.id);
-    },
-
-    computed: {
-        ...mapState(useCategoryStore, ["getCategory"])
+    props: {
+        order: Object,
     }
 }
 </script>
-
