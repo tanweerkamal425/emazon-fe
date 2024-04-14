@@ -23,7 +23,8 @@ export default {
     methods: {
         fetchCategory(id) {
             this.getCategory(id).then((res) => {
-                this.category = res.data;
+                this.category = res.category;
+                console.log(res);
             }).catch((err) => {
                 console.error(err);
             })
