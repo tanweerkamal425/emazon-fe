@@ -102,8 +102,8 @@
                             <template v-for="u in users" :key="u.id">
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ u.id }}</th>
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ u.name }}</th>
-                                    <td class="px-4 py-3">{{ u.gender }}</td>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ u.first_name + " " + u.last_name }}</th>
+                                    <td class="px-4 py-3">{{ u.gender == 0 ? 'Male' : 'Female' }}</td>
                                     <td class="px-4 py-3">{{u.email}}</td>
                                     <td class="px-4 py-3">{{ u.phone }}</td>
                                     <td class="px-4 py-3">{{ u.actvie }}</td>
