@@ -111,7 +111,13 @@
 </template>
 
 <script>
+import { FwbImg } from 'flowbite-vue'
+
 export default {
+    components: {
+        FwbImg
+    },
+    
     props: {
         user: Object
     }
