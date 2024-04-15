@@ -9,7 +9,9 @@ export const useProductStore = defineStore("product", {
 
     actions: {
         getProducts(query) {
-            const url = '/api/v1/products';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/products?' + queryParams.toString();
+            console.log(url);
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {
