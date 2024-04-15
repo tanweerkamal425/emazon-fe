@@ -8,7 +8,8 @@ export const useCategoryStore = defineStore("category", {
 
     actions: {
         getCategories(query) {
-            const url = '/api/v1/categories';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/categories?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

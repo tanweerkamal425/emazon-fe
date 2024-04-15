@@ -9,7 +9,8 @@ export const useProductImageStore = defineStore("product_image", {
 
     actions: {
         getProductImages(query) {
-            const url = '/api/v1/product-images';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/product-images?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

@@ -9,7 +9,8 @@ export const useProductSizeStore = defineStore("product_size", {
 
     actions: {
         getProductSizes(query) {
-            const url = '/api/v1/product-sizes';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/product-sizes?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

@@ -9,7 +9,8 @@ export const useCouponStore = defineStore("coupon", {
 
     actions: {
         getCoupons(query) {
-            const url = '/api/v1/coupons';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/coupons?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

@@ -9,7 +9,8 @@ export const usePaymentStore = defineStore("payment", {
 
     actions: {
         getPayments(query) {
-            const url = '/api/v1/payments';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/payments?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

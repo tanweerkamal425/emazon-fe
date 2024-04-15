@@ -9,7 +9,8 @@ export const useOrderStore = defineStore("order", {
 
     actions: {
         getOrders(query) {
-            const url = '/api/v1/orders';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/orders?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

@@ -9,7 +9,8 @@ export const useColorStore = defineStore("color", {
 
     actions: {
         getColors(query) {
-            const url = '/api/v1/colors';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/colors?' +  queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

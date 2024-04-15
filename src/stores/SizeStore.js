@@ -8,7 +8,8 @@ export const useSizeStore = defineStore("size", {
 
     actions: {
         getSizes(query) {
-            const url = '/api/v1/sizes';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/sizes?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {

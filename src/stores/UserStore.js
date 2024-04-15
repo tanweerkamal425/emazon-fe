@@ -9,7 +9,8 @@ export const useUserStore = defineStore("user", {
 
     actions: {
         getUsers(query) {
-            const url = '/api/v1/users';
+            let queryParams = new URLSearchParams(query);
+            const url = '/api/v1/users?' + queryParams.toString();
 
             return new Promise((resolve, reject) => {
                 axios.get(url, query).then((res) => {
