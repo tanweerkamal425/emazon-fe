@@ -1,6 +1,6 @@
 <template>
     {{ searchInput }}
-    <ProductTable :categories="categories" @input="onInput" @page-change="onPageChange" @selected="onSelected" :products="products" />
+    <ProductTable :categories="categories" @input="onInput" @page-change="onPageChange" @selected="onSelected" :products="products" @from-date="onDateChange" @to-date="onDateChange" />
 </template>
 
 <script>
@@ -32,9 +32,11 @@ export default {
             query: {
                 q: '',
                 category_id: '',
-                price_order: 1,
+                price_order: 0,
                 page: 1,
-            }
+                from_date: '',
+                to_date: '',
+            },
         }
     },
 
@@ -84,6 +86,16 @@ export default {
             // console.log(value);
             this.categoryId = value.categoryId;
             this.price = value.price;
+        },
+
+        onDateChange(obj) {
+            if (obj.id === 'from-date') {
+                this.query.from_date = obj.fromDate != null ? obj.fromDate : '';
+            }
+            if (obj.id === 'to-date') {
+                this.query.to_date = obj.toDate != null ? obj.toDate : '';
+            }
+            this.fetchProducts(this.query);
         }
     },
 
