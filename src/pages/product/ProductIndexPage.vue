@@ -1,5 +1,4 @@
 <template>
-    {{ searchInput }}
     <ProductTable :categories="categories" @input="onInput" @page-change="onPageChange" @selected="onSelected" :products="products" @from-date="onDateChange" @to-date="onDateChange" />
 </template>
 
