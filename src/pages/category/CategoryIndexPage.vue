@@ -14,12 +14,12 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                <input @input="onInput" type="text" id="simple-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
                             </div>
                         </form>
                     </div>
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                        <!-- <div class="flex items-center space-x-3 w-full md:w-auto">
                             <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
                                 <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -70,7 +70,21 @@
                                     </li>
                                 </ul>
                             </div>
+                        </div> -->
+                        <!-- date range picker -->
+                        <div class="flex">
+                            <div>
+                                <!-- <span>From</span> -->
+                                <date-picker format="YYYY-MM-DD hh:mm:ss" v-model:value="fromDate" valueType="format" placeholder="from-date"></date-picker>
+                            </div>
+                            <div>
+                                <!-- <span>To</span> -->
+                                <date-picker format="YYYY-MM-DD hh:mm:ss" v-model:value="toDate" valueType="format" placeholder="to-date"></date-picker>
+                            </div>
+                        
                         </div>
+
+
                         <router-link :to="{name: 'category.store'}" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -160,17 +174,26 @@
 import { mapState } from 'pinia';
 import {useCategoryStore} from '@/stores/CategoryStore.js'
 import Pagination from '../../components/Pagination.vue';
+import DatePicker from 'vue-datepicker-next';
+import 'vue-datepicker-next/index.css';
 
 export default {
     components: {
         Pagination,
+        DatePicker,
     },
 
     data() {
         return {
             categories: [],
+            searchInput: '',
+            fromDate: new Date(),
+            toDate: new Date(new Date().setDate(new Date().getDate() + 7)),
             query: {
                 page: '',
+                search: '',
+                from_date: '',
+                to_date: '',
             }
         }
     },
@@ -192,6 +215,10 @@ export default {
             // console.log(pageNum);
             this.query.page = pageNum
             this.fetchCategories(this.query);
+        },
+
+        onInput(event) {
+            this.searchInput = event.target.value;
         }
     },
 
@@ -202,6 +229,25 @@ export default {
 
     computed: {
         ...mapState(useCategoryStore, ["getCategories"]),
+    },
+
+    watch: {
+        searchInput() {
+            this.query.search = this.searchInput;
+            this.fetchCategories(this.query);
+        },
+
+        fromDate() {
+            console.log(this.fromDate);
+            this.query.from_date = this.fromDate != null ? this.fromDate : '';
+            this.fetchCategories(this.query);
+        },
+
+        toDate() {
+            console.log('to date changed');
+            this.query.to_date = this.toDate != null ? this.toDate : '';
+            this.fetchCategories(this.query);
+        }
     }
 }
 
