@@ -1,14 +1,14 @@
 <template>
+    <h1 class="text-2xl mb-4">User</h1>
     <fwb-img
         alt="flowbite-vue"
         :src="user.image_url"
         />
-    <h1 class="text-2xl mb-4">User</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <!-- <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            <tr>readableFormattedDate(
+              )  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
                     Product name
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -94,7 +94,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ user.created_at }}
+                    {{ readableFormattedDate(user.created_at) }}
                 </td>
             </tr>
             <tr>
@@ -102,7 +102,7 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ user.updated_at }}
+                    {{ readableFormattedDate(user.updated_at) }}
                 </td>
             </tr>
         </tbody>

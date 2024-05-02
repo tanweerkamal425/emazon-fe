@@ -7,7 +7,7 @@
                 <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
                     Product name
                 </th>
-                <th scope="col" class="px-6 py-3">
+         readableFormattedDate(       <th scope=")col" class="px-6 py-3">
                     Color
                 </th>
                 <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
@@ -80,7 +80,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ payment.created_at }}
+                    {{ readableFormattedDate(payment.created_at) }}
                 </td>
             </tr>
             <tr>
@@ -88,7 +88,7 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ payment.updated_at }}
+                    {{ readableFormattedDate(payment.updated_at) }}
                 </td>
             </tr>
         </tbody>

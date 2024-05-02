@@ -141,7 +141,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ product.created_at }}
+                    {{ readableFormattedDate(product.created_at) }}
                 </td>
             </tr>
             <tr>
@@ -149,7 +149,7 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ product.updated_at }}
+                    {{ readableFormattedDate(product.updated_at) }}
                 </td>
             </tr>
             <tr>
@@ -157,7 +157,7 @@
                     Published At
                 </th>
                 <td class="px-6 py-4">
-                    {{ product.published_at }}
+                    {{ readableFormattedDate(product.published_at) }}
                 </td>
             </tr>
         </tbody>

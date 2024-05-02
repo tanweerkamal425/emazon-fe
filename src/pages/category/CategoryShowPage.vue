@@ -54,7 +54,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.created_at }}
+                    {{ readableFormattedDate(category.created_at) }}
                 </td>
             </tr>
             <tr>
@@ -62,7 +62,7 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ category.updated_at }}
+                    {{ readableFormattedDate(category.updated_at) }}
                 </td>
             </tr>
         </tbody>
@@ -93,9 +93,9 @@ export default {
     methods: {
         fetchCategory(id) {
             this.getCategory(id).then((res) => {
-                this.category = res.data[0];
-                this.products = res.data[0].products;
-                console.log(this.products);
+                console.log(res.category);
+                this.category = res.category;
+                this.products = res.products;
             }).catch((err) => {
                 console.error(err);
             })

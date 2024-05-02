@@ -111,7 +111,7 @@
                                     <td class="px-4 py-3"><img :src="u.image" alt="">
                                     </td>
                                     <td class="px-4 py-3">{{ u.address_id }}</td>
-                                    <td class="px-4 py-3">{{ u.created_at }}</td>
+                                    <td class="px-4 py-3">{{ readableFormattedDate(u.created_at) }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <div class="flex flex-row">
                                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 flex flex-row" aria-labelledby="apple-imac-27-dropdown-button">

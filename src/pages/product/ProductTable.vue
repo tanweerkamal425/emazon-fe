@@ -1,4 +1,4 @@
-<template>
+Fc<template>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-auto">
             <h1 class="text-2xl mb-4">Products</h1>
@@ -118,8 +118,8 @@
                                     <td v-else class="px-4 py-3">{{ p.category_id}}</td>
                                     <td class="px-4 py-3">{{p.price_sp}}</td>
                                     <td class="px-4 py-3">{{p.price_mp}}</td>
-                                    <td class="px-4 py-3">{{p.description}}</td>
-                                    <td class="px-4 py-3">{{ p.created_at }}</td>
+                                    <!-- <td class="px-4 py-3">{{p.description}}</td> -->
+                                    <td class="px-4 py-3">{{ readableFormattedDate(p.created_at) }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
