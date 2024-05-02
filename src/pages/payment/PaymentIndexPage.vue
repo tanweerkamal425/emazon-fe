@@ -76,6 +76,11 @@
                                     </li>
                                 </ul>
                             </div>
+                            <select @input="onSelected" id="isActive" name="isActive" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Choose one</option>
+                            <option value="1">Inactive</option>
+                            <option value="2">Active</option>
+                        </select>
                         </div>
                     </div>
                 </div>
@@ -102,7 +107,7 @@
                                     <td class="px-4 py-3">{{p.amount}}</td>
                                     <td class="px-4 py-3">{{ p.order_group_id }}</td>
                                     <td class="px-4 py-3">{{ p.pg_payment_id }}</td>
-                                    <td class="px-4 py-3">{{ p.status }}</td>
+                                    <td class="px-4 py-3">{{ p.status == 0 ? 'Inactive' : 'Active' }}</td>
                                     <td class="px-4 py-3">{{ p.user_id }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <div class="flex flex-row">
@@ -144,9 +149,11 @@ export default {
         return {
             payments: [],
             searchInput: '',
+            isActive: '',
             query: {
                 page: '',
                 id: '',
+                is_active: '',
             }
         }
     },
@@ -172,6 +179,10 @@ export default {
         onInput(event) {
             this.searchInput = event.target.value;
             // console.log(event.target.value);
+        },
+
+        onSelected(event) {
+            this.isActive = event.target.value;
         }
     },
 
@@ -187,6 +198,11 @@ export default {
     watch: {
         searchInput() { 
             this.query.id = this.searchInput != null ? this.searchInput : '';
+            this.fetchPayments(this.query);
+        },
+
+        isActive() { 
+            this.query.is_active = this.isActive;
             this.fetchPayments(this.query);
         }
     }
