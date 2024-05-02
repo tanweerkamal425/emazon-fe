@@ -88,6 +88,11 @@
                             <option value="1">Low to high</option>
                             <option value="2">High to low</option>
                         </select>
+                        <select @input="onSelected" id="isActive" name="isActive" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Choose one</option>
+                            <option value="1">Inactive</option>
+                            <option value="2">Active</option>
+                        </select>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -119,7 +124,7 @@
                                     <td class="px-4 py-3">{{o.discount}}%</td>
                                     <td class="px-4 py-3">{{ o.user_id }}</td>
                                     <td class="px-4 py-3">{{o.applied_coupon_id}}</td>
-                                    <td class="px-4 py-3">{{ o.status }}</td>
+                                    <td class="px-4 py-3">{{ o.status == 0 ? 'Inactive' : 'Active' }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -181,12 +186,14 @@ export default {
             searchInput: '',
             amount: '',
             discount: '',
+            isActive: '',
             query: {
                 page: '',
                 status: '',
                 id: '',
                 amount: '',
                 discount: '',
+                is_active: '',
             }
         }
     },
@@ -220,6 +227,9 @@ export default {
             if (event.target.id === 'discount') {
                 this.discount = event.target.value;
             }
+            if (event.target.id === 'isActive') {
+                this.isActive = event.target.value;
+            }
             console.log(event.target.value);
         }
     },
@@ -246,6 +256,11 @@ export default {
 
         discount() {
             this.query.discount = this.discount;
+            this.fetchOrders(this.query);
+        },
+
+        isActive() {
+            this.query.is_active = this.isActive;
             this.fetchOrders(this.query);
         }
     }
