@@ -14,7 +14,7 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                <input @input="onInput" name="search" type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
                             </div>
                         </form>
                     </div>
@@ -25,7 +25,7 @@
                             </svg>
                             Add order
                         </a> -->
-                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                        <!-- <div class="flex items-center space-x-3 w-full md:w-auto">
                             <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
                                 <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -42,7 +42,6 @@
                                     <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete all</a>
                                 </div>
                             </div>
-                            <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
                                 </svg>
@@ -76,7 +75,19 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <!-- amount wise sort -->
+                        <select @input="onSelected" id="amount" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Sort amount</option>
+                            <option value="1">Low to high</option>
+                            <option value="2">High to low</option>
+                        </select>
+                        <select @input="onSelected" id="discount" name="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Sort discount</option>
+                            <option value="1">Low to high</option>
+                            <option value="2">High to low</option>
+                        </select>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -167,8 +178,15 @@ export default {
     data() {
         return {
             orders: [],
+            searchInput: '',
+            amount: '',
+            discount: '',
             query: {
-                page: ''
+                page: '',
+                status: '',
+                id: '',
+                amount: '',
+                discount: '',
             }
         }
     },
@@ -177,6 +195,7 @@ export default {
         fetchOrders(query = {}) {
             this.getOrders(query).then((res) => {
                 this.orders = res.data;
+                this.$router.push({name: 'order.index', query: query});
                 console.log(res.data);
             }).catch((error) => {
                 console.log(error);
@@ -188,6 +207,20 @@ export default {
         onPageChange(pageNum) {
             this.query.page = pageNum;
             this.fetchOrders(this.query);
+        },
+
+        onInput(event) {
+            this.searchInput = event.target.value;
+        },
+
+        onSelected(event) {
+            if (event.target.id === 'amount') {
+                this.amount = event.target.value;
+            }
+            if (event.target.id === 'discount') {
+                this.discount = event.target.value;
+            }
+            console.log(event.target.value);
         }
     },
 
@@ -198,6 +231,23 @@ export default {
 
     computed: {
         ...mapState(useOrderStore, ["getOrders"]),
+    },
+
+    watch: {
+        searchInput() {
+            this.query.id = this.searchInput != null ? this.searchInput : '';
+            this.fetchOrders(this.query);
+        },
+
+        amount() {
+            this.query.amount = this.amount;
+            this.fetchOrders(this.query);
+        },
+
+        discount() {
+            this.query.discount = this.discount;
+            this.fetchOrders(this.query);
+        }
     }
 }
 
