@@ -14,7 +14,7 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                <input @input="onInput" name="search" type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
                             </div>
                         </form>
                     </div>
@@ -77,6 +77,28 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- date range picker -->
+                        <div class="flex">
+                                    <div>
+                                        <!-- <span>From</span> -->
+                                        <date-picker format="YYYY-MM-DD hh:mm:ss" v-model:value="fromDate" valueType="format" placeholder="from-date"></date-picker>
+                                    </div>
+                                    <div>
+                                        <!-- <span>To</span> -->
+                                        <date-picker format="YYYY-MM-DD hh:mm:ss" v-model:value="toDate" valueType="format" placeholder="to-date"></date-picker>
+                                    </div>
+                                
+                                </div>
+                        <select @input="onSelected" id="gender" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Select gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        <select @input="onSelected" id="isActive" name="isActive" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected>Choose one</option>
+                            <option value="1">Inactive</option>
+                            <option value="2">Active</option>
+                        </select>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -106,8 +128,8 @@
                                     <td class="px-4 py-3">{{ u.gender == 0 ? 'Male' : 'Female' }}</td>
                                     <td class="px-4 py-3">{{u.email}}</td>
                                     <td class="px-4 py-3">{{ u.phone }}</td>
-                                    <td class="px-4 py-3">{{ u.actvie }}</td>
-                                    <td class="px-4 py-3">{{ u.blocked }}</td>
+                                    <td class="px-4 py-3">{{ u.is_active == 0 ? 'Inactive' : 'Active' }}</td>
+                                    <td class="px-4 py-3">{{ u.is_blocked }}</td>
                                     <td class="px-4 py-3"><img :src="u.image" alt="">
                                     </td>
                                     <td class="px-4 py-3">{{ u.address_id }}</td>
@@ -142,17 +164,30 @@ import { mapState } from 'pinia';
 import {useUserStore} from '@/stores/UserStore.js'
 import { initDropdowns } from 'flowbite';
 import Pagination from '../../components/Pagination.vue';
+import DatePicker from 'vue-datepicker-next';
+import 'vue-datepicker-next/index.css';
 
 export default {
     components: {
-        Pagination
+        Pagination,
+        DatePicker,
     },
 
     data() {
         return {
             users: [],
+            searchInput: '',
+            isActive: '',
+            gender: '',
+            fromDate: new Date(),
+            toDate: new Date(new Date().setDate(new Date().getDate() + 7)),
             query: {
                 page: '',
+                q: '',
+                is_active: '',
+                gender: '',
+                from_date: '',
+                to_date: '',
             },
         }
     },
@@ -173,6 +208,21 @@ export default {
         onPageChange(pageNum) {
             this.query.page = pageNum;
             this.fetchUsers(this.query);
+        },
+
+        onInput(event) {
+            this.searchInput = event.target.value;
+            // console.log(event.target.value);
+        },
+
+        onSelected(event) {
+            console.log(event.target.value);
+            if (event.target.id == 'gender') {
+                this.gender = event.target.value;
+            }
+            if (event.target.id === 'isActive') {
+                this.isActive = event.target.value;
+            }
         }
     },
 
@@ -183,6 +233,35 @@ export default {
 
     computed: {
         ...mapState(useUserStore, ["getUsers"]),
+    },
+
+    watch: {
+        searchInput() {
+            this.query.q = this.searchInput != null ? this.searchInput : '';
+            this.fetchUsers(this.query);
+        },
+
+        gender() {
+            this.query.gender = this.gender;
+            this.fetchUsers(this.query);
+        },
+
+        isActive() {
+            this.query.is_active = this.isActive;
+            this.fetchUsers(this.query);
+        },
+
+        fromDate() {
+            console.log(this.fromDate);
+            this.query.from_date = this.fromDate != null ? this.fromDate : '';
+            this.fetchUsers(this.query);
+        },
+
+        toDate() {
+            console.log('to date changed');
+            this.query.to_date = this.toDate != null ? this.toDate : '';
+            this.fetchUsers(this.query);
+        }
     }
 }
 
