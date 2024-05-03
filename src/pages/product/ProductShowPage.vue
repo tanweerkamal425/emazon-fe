@@ -239,6 +239,7 @@ export default {
 
         storeColors() {
             console.log('clicked')
+            console.log(this.checkedColors);
             this.storeColor(this.route.params.id, {colors: this.checkedColors}).then((res) => {
             }).catch((err) => {
                 console.log(err);
