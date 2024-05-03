@@ -107,7 +107,7 @@ export default {
     methods: {
         fetchCategory(id) {
             this.getCategory(id).then((res) => {
-                console.log(res.category);
+                console.log(res);
                 this.category = res.category;
                 this.products = res.products;
             }).catch((err) => {
