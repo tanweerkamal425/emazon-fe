@@ -2,6 +2,7 @@
     
 <OrderShowTable :order="order" />
 <UserShowTable :user="user" />
+<orderItemsIndexTable :orderItems="orderItems"/>
 
 </template>
 
@@ -11,11 +12,13 @@ import { useRoute } from 'vue-router';
 import {useOrderStore} from '@/stores/OrderStore.js';
 import OrderShowTable from './OrderShowTable.vue';
 import UserShowTable from '../user/UserShowTable.vue';
+import OrderItemsIndexTable from './OrderItemsIndexTable.vue';
 
 export default {
     components: {
         OrderShowTable,
-        UserShowTable
+        UserShowTable,
+        OrderItemsIndexTable
     },
 
     data() {
@@ -31,6 +34,7 @@ export default {
             this.getOrder(id).then((res) => {
                 this.order = res.data.order;
                 this.user = res.data.user;
+                this.orderItems = res.data.order_items;
                 console.log(res.data);
             }).catch((err) => {
                 console.error(err);

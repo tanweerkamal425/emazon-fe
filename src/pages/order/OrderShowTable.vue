@@ -80,7 +80,7 @@
                     Created At
                 </th>
                 <td class="px-6 py-4">
-                    {{ order.created_at }}
+                    {{ readableFormattedDate(order.created_at) }}
                 </td>
             </tr>
             <tr>
@@ -88,7 +88,7 @@
                     Updated At
                 </th>
                 <td class="px-6 py-4">
-                    {{ order.updated_at }}
+                    {{ readableFormattedDate(order.updated_at) }}
                 </td>
             </tr>
         </tbody>
