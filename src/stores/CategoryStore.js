@@ -60,6 +60,22 @@ export const useCategoryStore = defineStore("category", {
             })
         },
 
+        defaultUpload(id, file) {
+            const url = `/api/v1/categories/${id}/images`;
+
+            const form = new FormData();
+            form.append('image_url', file);
+            
+            return new Promise((resolve, reject) => {
+                axios.post(url, form).then((data) => {
+                    resolve(data);
+                }).catch((error) => {
+                    console.error(error);
+                    reject(error);
+                });
+            });
+        },
+
         editCategory(id, category) {
             const url = `/api/v1/categories/${id}`;
             return new Promise((resolve, reject) => {
