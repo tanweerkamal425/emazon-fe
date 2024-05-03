@@ -110,7 +110,7 @@
                                 <th scope="col" class="px-4 py-3">Gender</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
                                 <th scope="col" class="px-4 py-3">Phone</th>
-                                <th scope="col" class="px-4 py-3">Active</th>
+                                <th scope="col" class="px-4 py-3">Status</th>
                                 <th scope="col" class="px-4 py-3">Blocked</th>
                                 <th scope="col" class="px-4 py-3">Image</th>
                                 <th scope="col" class="px-4 py-3">Address ID</th>
@@ -128,7 +128,7 @@
                                     <td class="px-4 py-3">{{ u.gender == 0 ? 'Male' : 'Female' }}</td>
                                     <td class="px-4 py-3">{{u.email}}</td>
                                     <td class="px-4 py-3">{{ u.phone }}</td>
-                                    <td class="px-4 py-3">{{ u.is_active == 0 ? 'Inactive' : 'Active' }}</td>
+                                    <td class="px-4 py-3" :class="[u.is_active == 1 ? 'active' : 'inactive']">{{ u.is_active == 0 ? 'Inactive' : 'Active' }}</td>
                                     <td class="px-4 py-3">{{ u.is_blocked }}</td>
                                     <td class="px-4 py-3"><img :src="u.image" alt="">
                                     </td>
@@ -267,3 +267,13 @@ export default {
 
 
 </script>
+
+<style>
+.active {
+    color: green;
+}
+
+.inactive {
+    color: red;
+}
+</style>

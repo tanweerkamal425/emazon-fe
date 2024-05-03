@@ -796,16 +796,10 @@
 	              :to="{name: 'product.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M14 7h-4v3a1 1 0 0 1-2 0V7H6a1 1 0 0 0-.997.923l-.917 11.924A2 2 0 0 0 6.08 22h11.84a2 2 0 0 0 1.994-2.153l-.917-11.924A1 1 0 0 0 18 7h-2v3a1 1 0 1 1-2 0V7Zm-2-3a2 2 0 0 0-2 2v1H8V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-2-2Z" clip-rule="evenodd"/>
+</svg>
+
 	              <span class="ml-3">Products</span>
 	            </router-link>
 	          </li>
@@ -814,16 +808,11 @@
 	              :to="{name: 'category.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M6 5a2 2 0 0 1 2-2h4.157a2 2 0 0 1 1.656.879L15.249 6H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2v-5a3 3 0 0 0-3-3h-3.22l-1.14-1.682A3 3 0 0 0 9.157 6H6V5Z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M3 9a2 2 0 0 1 2-2h4.157a2 2 0 0 1 1.656.879L12.249 10H3V9Zm0 3v7a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-7H3Z" clip-rule="evenodd"/>
+</svg>
+
 	              <span class="ml-3">Categories</span>
 	            </router-link>
 	          </li>
@@ -832,16 +821,10 @@
 	              :to="{name: 'size.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.737 8.737a21.49 21.49 0 0 1 3.308-2.724m0 0c3.063-2.026 5.99-2.641 7.331-1.3 1.827 1.828.026 6.591-4.023 10.64-4.049 4.049-8.812 5.85-10.64 4.023-1.33-1.33-.736-4.218 1.249-7.253m6.083-6.11c-3.063-2.026-5.99-2.641-7.331-1.3-1.827 1.828-.026 6.591 4.023 10.64m3.308-9.34a21.497 21.497 0 0 1 3.308 2.724m2.775 3.386c1.985 3.035 2.579 5.923 1.248 7.253-1.336 1.337-4.245.732-7.295-1.275M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+</svg>
+
 	              <span class="ml-3">Sizes</span>
 	            </router-link>
 	          </li>
@@ -850,20 +833,14 @@
 	              :to="{name: 'color.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7h.01m3.486 1.513h.01m-6.978 0h.01M6.99 12H7m9 4h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 3.043 12.89 9.1 9.1 0 0 0 8.2 20.1a8.62 8.62 0 0 0 3.769.9 2.013 2.013 0 0 0 2.03-2v-.857A2.036 2.036 0 0 1 16 16Z"/>
+</svg>
+
 	              <span class="ml-3">Colours</span>
 	            </router-link>
 	          </li>
-			  <li>
+			  <!-- <li>
 	            <router-link
 	              :to="{name: 'product_image.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -880,8 +857,8 @@
 	              </svg>
 	              <span class="ml-3">Product Images</span>
 	            </router-link>
-	          </li>
-			  <li>
+	          </li> -->
+			  <!-- <li>
 	            <router-link
 	              :to="{name: 'product_color.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -898,8 +875,8 @@
 	              </svg>
 	              <span class="ml-3">Product Colors</span>
 	            </router-link>
-	          </li>
-			  <li>
+	          </li> -->
+			  <!-- <li>
 	            <router-link
 	              :to="{name: 'product_size.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -916,22 +893,16 @@
 	              </svg>
 	              <span class="ml-3">Product Sizes</span>
 	            </router-link>
-	          </li>
+	          </li> -->
 			  <li>
 	            <router-link
 	              :to="{name: 'order.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6h8m-8 6h8m-8 6h8M4 16a2 2 0 1 1 3.321 1.5L4 20h5M4 5l2-1v6m-2 0h4"/>
+</svg>
+
 	              <span class="ml-3">Orders</span>
 	            </router-link>
 	          </li>
@@ -940,16 +911,12 @@
 	              :to="{name: 'payment.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M7 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2v-4a3 3 0 0 0-3-3H7V6Z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M2 11a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7Zm7.5 1a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" clip-rule="evenodd"/>
+  <path d="M10.5 14.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+</svg>
+
 	              <span class="ml-3">Payments</span>
 	            </router-link>
 	          </li>
@@ -958,16 +925,10 @@
 	              :to="{name: 'coupon.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+	              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M4 5a2 2 0 0 0-2 2v2.5a1 1 0 0 0 1 1 1.5 1.5 0 1 1 0 3 1 1 0 0 0-1 1V17a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a1 1 0 0 0-1-1 1.5 1.5 0 1 1 0-3 1 1 0 0 0 1-1V7a2 2 0 0 0-2-2H4Z"/>
+</svg>
+
 	              <span class="ml-3">Coupons</span>
 	            </router-link>
 	          </li>
@@ -976,16 +937,9 @@
 	              :to="{name: 'user.index'}"
 	              class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
 	            >
-	              <svg
-	                aria-hidden="true"
-	                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-	                fill="currentColor"
-	                viewBox="0 0 20 20"
-	                xmlns="http://www.w3.org/2000/svg"
-	              >
-	                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-	                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-	              </svg>
+				<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                  <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
+               </svg>
 	              <span class="ml-3">Users</span>
 	            </router-link>
 	          </li>

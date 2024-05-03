@@ -118,13 +118,13 @@
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ o.id }}</th>
                                     <td class="px-4 py-3">{{ o.rzp_order_id }}</td>
-                                    <td class="px-4 py-3">{{o.amount}}</td>
-                                    <td class="px-4 py-3">{{ o.gross_total }}</td>
-                                    <td class="px-4 py-3">{{ o.sub_total }}</td>
+                                    <td class="px-4 py-3">&#x20B9; {{Number(o.amount).toLocaleString()}}</td>
+                                    <td class="px-4 py-3">&#x20B9; {{ Number(o.gross_total).toLocaleString() }}</td>
+                                    <td class="px-4 py-3">&#x20B9; {{ Number(o.sub_total).toLocaleString() }}</td>
                                     <td class="px-4 py-3">{{o.discount}}%</td>
                                     <td class="px-4 py-3">{{ o.user_id }}</td>
                                     <td class="px-4 py-3">{{o.applied_coupon_id}}</td>
-                                    <td class="px-4 py-3">{{ o.status == 0 ? 'Inactive' : 'Active' }}</td>
+                                    <td class="px-4 py-3" :class="[o.status == 1 ? 'active' : 'inactive']">{{ o.status == 0 ? 'Inactive' : 'Active' }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -265,6 +265,14 @@ export default {
         }
     }
 }
-
-
 </script>
+
+<style>
+.active {
+    color: green;
+}
+
+.inactive {
+    color: red;
+}
+</style>

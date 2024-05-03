@@ -104,10 +104,10 @@
                             <template v-for="p in payments" :key="p.id">
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{p.id}}</th>
-                                    <td class="px-4 py-3">{{p.amount}}</td>
+                                    <td class="px-4 py-3">&#x20B9; {{Number(p.amount).toLocaleString()}}</td>
                                     <td class="px-4 py-3">{{ p.order_group_id }}</td>
                                     <td class="px-4 py-3">{{ p.pg_payment_id }}</td>
-                                    <td class="px-4 py-3">{{ p.status == 0 ? 'Inactive' : 'Active' }}</td>
+                                    <td class="px-4 py-3" :class="[p.status == 1 ? 'active' : 'inactive']">{{ p.status == 0 ? 'Inactive' : 'Active' }}</td>
                                     <td class="px-4 py-3">{{ p.user_id }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         <div class="flex flex-row">
@@ -209,3 +209,15 @@ export default {
 }
 
 </script>
+
+<style>
+.active {
+    color: green;
+}
+
+.inactive {
+    color: red;
+}
+
+
+</style>
