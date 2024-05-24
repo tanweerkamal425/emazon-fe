@@ -10,6 +10,9 @@ import { useRoute } from 'vue-router';
 import { mapState } from 'pinia';
 import { ProductModel } from "../../models/ProductModel.js";
 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 export default {
     components: {
         ProductForm

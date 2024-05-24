@@ -9,6 +9,11 @@ import { mapState } from 'pinia'
 import {useCategoryStore} from '@/stores/CategoryStore.js'
 import { useProductStore } from '../../stores/ProductStore'
 
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+
 export default {
 
     components: {
@@ -34,7 +39,7 @@ export default {
         onAddProduct() {
             console.log('function called')
             this.addProduct(this.product).then((res) => {
-                this.$router.push({name: 'product.index'});
+                this.$router.push({name: 'product.index', query: {productCreated: true}});
             }).catch((error) => {
                 console.log(error);
             })

@@ -7,6 +7,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import Vue3Toasity, { toast } from 'vue3-toastify';
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -30,6 +32,7 @@ app.config.globalProperties.readableFormattedLongDate = (dateString) => {
 
 	return result;
 };
+
 
 app.mount('#app')
 

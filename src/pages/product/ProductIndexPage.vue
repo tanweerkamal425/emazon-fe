@@ -11,6 +11,10 @@ import {useProductStore} from '@/stores/ProductStore.js'
 import {mapState} from 'pinia'
 import ProductTable from './ProductTable.vue'
 import { useCategoryStore } from '../../stores/CategoryStore'
+import { useRoute } from 'vue-router'
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 
 
@@ -28,6 +32,7 @@ export default {
             searchInput: null,
             price: null,
             categoryId: null,
+            route: null,
             query: {
                 q: '',
                 category_id: '',
@@ -95,14 +100,17 @@ export default {
                 this.query.to_date = obj.toDate != null ? obj.toDate : '';
             }
             this.fetchProducts(this.query);
-        }
+        },
     },
 
     mounted() {
+        console.log('product index mounted');
+        console.log(useRoute().query.productCreated);
         this.fetchProducts();
         this.fetchCategories();
         initDropdowns();
         initModals();
+        useRoute().query.productEdited == true ? toast.success('success') : '';
     },
 
     computed: {

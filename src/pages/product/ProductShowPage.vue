@@ -181,6 +181,9 @@ import { FwbImg } from 'flowbite-vue'
 import ProductImageModal from './ProductImageModal.vue';
 import DefaultProductImageModal from './DefaultProductImageModal.vue';
 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 export default {
     components: {
         Modal,
@@ -238,19 +241,28 @@ export default {
         },
 
         storeColors() {
-            console.log('clicked')
-            console.log(this.checkedColors);
             this.storeColor(this.route.params.id, {colors: this.checkedColors}).then((res) => {
+                toast.success("Colors added successfully !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
             }).catch((err) => {
                 console.log(err);
+                toast.error("Sorry, failed to add colors !", {
+                    position: toast.POSITION.TOP_LEFT,
+                });
             })
         },
 
         storeSizes() {
-            console.log('clicked')
             this.storeSize(this.route.params.id, {sizes: this.checkedSizes}).then((res) => {
+                toast.success("Sizes added successfully !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
             }).catch((err) => {
                 console.log(err);
+                toast.error("Sorry, failed to add sizes !", {
+                    position: toast.POSITION.TOP_LEFT,
+                });
             })
         },
 
@@ -265,29 +277,38 @@ export default {
         },
 
         onUploadImage(isDefault) {
-            // console.log(this.file);
             this.uploadImage(this.route.params.id, this.file).then((data) => {
-                console.log("SUCCESS", data);
                 this.getLatestImage(this.route.params.id).then((res) => {
                     this.image = res.data.data;
                     this.images = [...this.images, this.image];
+                    toast.success("Image uploaded successfully !", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
                 }).catch((err) => {
                     console.log(err);
                 })
             }).catch((error) => {
                 console.error(error);
+                toast.error("Sorry, failed to upload image !", {
+                    position: toast.POSITION.TOP_LEFT,
+                });
             }) 
         },
 
         onDefaultUpload() {
             this.defaultUpload(this.route.params.id, this.file).then((res) => {
-                console.log('success');
                 this.getProduct(this.route.params.id).then((res) => {
                     this.image = res.product.image_url;
                     this.product.image_url = this.image;
+                    toast.success("Default image uploaded successfully !", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
                 })
             }).catch((err) => {
                 console.log(err);
+                toast.error("Sorry, failed to upload image !", {
+                    position: toast.POSITION.TOP_LEFT,
+                });
             })
         },  
 
