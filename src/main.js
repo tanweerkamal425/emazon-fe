@@ -33,6 +33,5 @@ app.config.globalProperties.readableFormattedLongDate = (dateString) => {
 	return result;
 };
 
-
 app.mount('#app')
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '@/pages/auth/LoginPage.vue'
 import DashboardPage from '@/pages/home/DashboardPage.vue'
+import ColumnChart from '@/pages/home/ColumnChart.vue'
 
 import ProductIndexPage from '@/pages/product/ProductIndexPage.vue'
 import ProductCreatePage from '../pages/product/ProductCreatePage.vue'
@@ -70,6 +71,7 @@ const router = createRouter({
     { path: '/auth/login', name: 'auth.login', component: LoginPage },
     { path: '/admin',children: [
         { path: 'dashboard', name: 'home.dashboard', component: DashboardPage, meta: { requiresAuth: true, isAdmin: true } },
+        { path: 'chart', name: 'home.chart', component: ColumnChart, meta: {requiresAuth: true, isAdmin: true}},
         { path: 'products', name: 'product.index', component: ProductIndexPage, meta: { requiresAuth: true, isAdmin: true } },
         { path: 'products/store', name: 'product.store', component: ProductCreatePage, meta: { requiresAuth: true, isAdmin: true } },
         { path: 'products/:id', name: 'product.show', component: ProductShowPage, meta: { requiresAuth: true, isAdmin: true } },
